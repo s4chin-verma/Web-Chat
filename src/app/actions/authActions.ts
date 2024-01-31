@@ -1,9 +1,8 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { RegisterUserPayload, LoginUserPayload, ResetPasswordPayload } from '@/lib/types';
+import { RegisterUserPayload, LoginUserPayload } from '@/app/types/payloadTypes';
 import { showToast } from '@/lib/utils';
-
-const backendURL = 'http://localhost:8080';
+import { backendURL } from '../types';
 
 export const registerUser = createAsyncThunk(
   'auth/register',
@@ -20,6 +19,7 @@ export const registerUser = createAsyncThunk(
         { username, email, password },
         config
       );
+
       return data;
     } catch (error: any) {
       showToast(error.response.data.msg, 'error');
@@ -46,6 +46,7 @@ export const userLogin = createAsyncThunk(
         { username, password },
         config
       );
+
       localStorage.setItem('token', data.token);
       return data;
     } catch (error: any) {
@@ -55,25 +56,6 @@ export const userLogin = createAsyncThunk(
       } else {
         return rejectWithValue(error.message);
       }
-    }
-  }
-);
-
-export const resetPassword = createAsyncThunk(
-  'auth/reset-password',
-  async ({ email }: ResetPasswordPayload, { rejectWithValue }) => {
-    try {
-      const config = {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      };
-      const { data } = await axios.post(`${backendURL}/api/user/reset-password`, { email }, config);
-      showToast(data.msg, 'success');
-      return data;
-    } catch (error: any) {
-      showToast(error.response.data.msg);
-      return rejectWithValue(error.message);
     }
   }
 );

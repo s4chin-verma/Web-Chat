@@ -1,19 +1,21 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { ResetPassInput } from '@/lib/types';
+import { ChangePassInput } from '@/lib/types';
 import { Input, Button, Loader } from '@/components';
-import { resetPassword } from '@/app/api/authApi';
-import { emailValidator, showToast } from '@/lib/utils';
+import { changePassword } from '@/app/actions/passwordActions';
+import { passwordValidator, showToast } from '@/lib/utils';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/app/store';
+import { useParams } from 'react-router-dom';
 
 const ChangePassword: React.FC = () => {
-  const { register, handleSubmit } = useForm<ResetPassInput>();
+  const { register, handleSubmit } = useForm<ChangePassInput>();
   const { loading } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch<any>();
+  const { token } = useParams();
 
-  const onSubmit: SubmitHandler<ResetPassInput> = data => {
-    const { error, status } = emailValidator(data.email);
-    if (status === true) dispatch(resetPassword(data));
+  const onSubmit: SubmitHandler<ChangePassInput> = data => {
+    const { error, status } = passwordValidator(data);
+    if (status === true) dispatch(changePassword({ password: data.password, token }));
     else showToast(error, 'warning');
   };
 
@@ -25,8 +27,13 @@ const ChangePassword: React.FC = () => {
       </div>
       <p className="text-gray-600 mb-6">Please Enter Your New Password</p>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Input label="Password" id="password" register={register} />
-        <Input label="Confirm Password" id="confirmPassword" register={register} />
+        <Input label="Password" type="password" name="password" register={register} />
+        <Input
+          label="Confirm Password"
+          type="password"
+          name="confirmPassword"
+          register={register}
+        />
         <Button children="Reset Password" type="submit" className="mb-6" />
       </form>
     </section>

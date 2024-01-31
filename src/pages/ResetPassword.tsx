@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { ResetPassInput } from '@/lib/types';
 import { Input, Button, Loader } from '@/components';
-import { resetPassword } from '@/app/api/authApi';
+import { resetPassword } from '@/app/actions/passwordActions';
 import { emailValidator, showToast } from '@/lib/utils';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/app/store';
@@ -27,7 +27,7 @@ const ResetPassword: React.FC = () => {
         You can change your password in easy steps by entering your email.
       </p>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Input label="Email" id="email" register={register} />
+        <Input label="Email" type='email' name="email" register={register} />
         <Button children="Reset Password" type="submit" className="mb-6" />
       </form>
       <Button to="/login" children="Remember Your Password" type="button" />

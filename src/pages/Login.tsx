@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Button, Error, Loader, Input, FormLink, CheckBox } from '@/components';
 import { LoginInput } from '@/lib/types';
-import { userLogin } from '@/app/api/authApi';
+import { userLogin } from '@/app/actions/authActions';
 import { LoginValidator, showToast } from '@/lib/utils';
 import { RootState } from '@/app/store';
 
@@ -45,8 +45,8 @@ const LoginPage: React.FC = () => {
           {error && <Error>{error}</Error>}
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Input register={register} id="username" label="Username" />
-          <Input register={register} id="password" label="Password" />
+          <Input register={register} name="username" type="text" label="Username" />
+          <Input register={register} name="password" type="password" label="Password" />
           <CheckBox
             label="Remember Me"
             id="remember me"
@@ -58,7 +58,7 @@ const LoginPage: React.FC = () => {
           <FormLink children="Forgot Password?" to="/reset-password" classname="mb-6" />
           <Button children="Login" type="submit" />
         </form>
-        <FormLink children="Sign up Here" to="/register" />
+        <FormLink children="Sign up Here" to="/register" classname='text-center'/>
       </div>
     </section>
   );

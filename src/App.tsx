@@ -1,5 +1,6 @@
 import { createBrowserRouter, Outlet } from 'react-router-dom';
 import { Login, Home, Register, Chat, ResetPassword, ChangePassword, NotFound } from '@/pages';
+import { ThemeProvider } from './context/DarkModeProvider';
 import { Toast } from '@/components';
 import { Provider } from 'react-redux';
 import { store } from '@/app/store';
@@ -8,9 +9,11 @@ import { Header } from './container';
 const App: React.FC = () => {
   return (
     <Provider store={store}>
-      <Header />
-      <Outlet />
-      <Toast />
+      <ThemeProvider>
+        <Header />
+        <Outlet />
+        <Toast />
+      </ThemeProvider>
     </Provider>
   );
 };

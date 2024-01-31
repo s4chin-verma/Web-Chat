@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { registerUser, resetPassword, userLogin } from '@/app/api/authApi';
-import { AuthState } from '@/lib/types';
+import { registerUser, userLogin } from '@/app/actions/authActions';
+import { resetPassword, changePassword } from '@/app/actions/passwordActions';
+import { AuthState } from '@/app/types';
 
 const initialState: AuthState = {
   loading: false,
@@ -50,6 +51,15 @@ const authSlice = createSlice({
         state.loading = false;
       })
       .addCase(resetPassword.rejected, (state, { payload }) => {
+        state.error = payload as string;
+      })
+      .addCase(changePassword.pending, state => {
+        state.loading = true;
+      })
+      .addCase(changePassword.fulfilled, state => {
+        state.loading = false;
+      })
+      .addCase(changePassword.rejected, (state, { payload }) => {
         state.error = payload as string;
       });
   },

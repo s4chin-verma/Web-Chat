@@ -8,6 +8,7 @@ import FormLink from './form/FormLink';
 import CheckBox from './form/CheckBox';
 import NavItem from './nav/NavLink';
 import NavButton from './nav/NavButton';
+import DarkModeBtn from './button/DarkModeBtn';
 
 export {
   Error,
@@ -20,4 +21,5 @@ export {
   CheckBox,
   NavItem,
   NavButton,
+  DarkModeBtn,
 };

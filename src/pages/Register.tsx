@@ -2,7 +2,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { CheckBox, Error, Input, FormLink, Button, Loader } from '@/components';
 import { registerValidator, showToast } from '@/lib/utils';
-import { registerUser } from '@/app/api/authApi';
+import { registerUser } from '@/app/actions/authActions';
 import { RootState } from '@/app/store';
 import { RegisterInput } from '@/lib/types';
 import { useState } from 'react';
@@ -35,10 +35,10 @@ const Register: React.FC = () => {
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           {error && <Error>{error}</Error>}
-          <Input register={register} id="username" label="username" />
-          <Input register={register} id="email" label="email" />
-          <Input register={register} id="password" label="password" />
-          <Input register={register} id="password" label="Confirm Password" />
+          <Input register={register} type="text" name="username" label="username" />
+          <Input register={register} type="emil" name="email" label="email" />
+          <Input register={register} type="password" name="password" label="password" />
+          <Input register={register} type="password" name="password" label="Confirm Password" />
           <CheckBox
             id="remember me"
             label="Remember me"

@@ -1,4 +1,4 @@
-import { NavItem, NavButton } from '@/components';
+import { NavItem, NavButton, DarkModeBtn } from '@/components';
 import { useState } from 'react';
 import { navbarSection } from '@/lib/navbar';
 import { useWindowWidth } from '@/context/windowWidth';
@@ -8,7 +8,6 @@ const Header: React.FC = () => {
   const [navbarCollapsed, setNavbarCollapsed] = useState(false);
   const { navLinks } = navbarSection;
   const windowWidth = useWindowWidth();
-  console.log(navbarCollapsed);
 
   return (
     <div className="fixed inset-x-0 top-0 right-0 z-50 ">
@@ -28,7 +27,7 @@ const Header: React.FC = () => {
               />
             </div>
             {(navbarCollapsed || windowWidth > 768) && (
-              <nav className="flex flex-col flex-grow pb-4 md:pb-0 md:flex md:justify-end md:flex-row">
+              <nav className="flex flex-col flex-grow pb-4 md:pb-0 md:flex md:justify-end md:flex-row gap-2">
                 {navLinks.map((navLink, index) => (
                   <NavItem
                     key={index}
@@ -37,6 +36,7 @@ const Header: React.FC = () => {
                     onClick={() => setNavbarCollapsed(false)}
                   />
                 ))}
+                <DarkModeBtn />
               </nav>
             )}
           </div>
