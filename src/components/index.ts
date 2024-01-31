@@ -6,5 +6,18 @@ import Loader from './ui/Loader';
 import Button from './form/Button';
 import FormLink from './form/FormLink';
 import CheckBox from './form/CheckBox';
+import NavItem from './nav/NavLink';
+import NavButton from './nav/NavButton';
 
-export { Error, Toast, Input, AnimatedImage, Button, Loader, FormLink, CheckBox };
+export {
+  Error,
+  Toast,
+  Input,
+  AnimatedImage,
+  Button,
+  Loader,
+  FormLink,
+  CheckBox,
+  NavItem,
+  NavButton,
+};

@@ -30,7 +30,7 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="bg-gray-100 flex justify-center items-center h-screen">
+    <section className="bg-gray-100 flex justify-center items-center h-screen">
       <div className="w-1/2 h-screen hidden lg:block">
         <img
           src="https://placehold.co/800x/667fff/ffffff.png?text=Your+Image&font=Montserrat"
@@ -60,7 +60,7 @@ const LoginPage: React.FC = () => {
         </form>
         <FormLink children="Sign up Here" to="/register" />
       </div>
-    </div>
+    </section>
   );
 };
 

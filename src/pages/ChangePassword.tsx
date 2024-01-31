@@ -18,7 +18,7 @@ const ChangePassword: React.FC = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-8 bg-white p-8 rounded-md shadow-md">
+    <section className="max-w-md mx-auto mt-24 bg-white p-8 rounded-md shadow-md">
       <div className="flex gap-4">
         <h2 className="text-2xl font-bold mb-4">Change Password!</h2>
         {loading && <Loader />}
@@ -29,8 +29,7 @@ const ChangePassword: React.FC = () => {
         <Input label="Confirm Password" id="confirmPassword" register={register} />
         <Button children="Reset Password" type="submit" className="mb-6" />
       </form>
-      <Button to="/login" children="Go Back" type="button" />
-    </div>
+    </section>
   );
 };
 
