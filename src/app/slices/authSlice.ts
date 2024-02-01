@@ -5,10 +5,10 @@ import { AuthState, storedUser } from '@/app/types';
 
 const initialState: AuthState = {
   loading: false,
-  userInfo: storedUser !== null ? JSON.parse(storedUser) : {},
+  userInfo: storedUser !== null ? JSON.parse(storedUser) : null,
   userToken: localStorage.getItem('token') || null,
   error: null,
-  success: false,
+  success: storedUser !== null,
 };
 
 const authSlice = createSlice({
@@ -17,6 +17,9 @@ const authSlice = createSlice({
   reducers: {
     setLoading: state => {
       state.loading = true;
+    },
+    resetAuthState: () => {
+      return initialState;
     },
   },
   extraReducers: builder => {
@@ -69,5 +72,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { setLoading } = authSlice.actions;
+export const { setLoading, resetAuthState } = authSlice.actions;
 export default authSlice.reducer;

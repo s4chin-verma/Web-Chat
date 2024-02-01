@@ -5,7 +5,7 @@ interface LeftChatBubbleProps {
 }
 
 const LeftChatBubble: React.FC<LeftChatBubbleProps> = ({ message }) => {
-  const senderPictureUrl = useAppSelector(state => state.chat.senderPicture);
+  const senderPictureUrl = useAppSelector(state => state.chat.sender?.picture);
 
   return (
     <div className="flex mb-4 cursor-pointer">

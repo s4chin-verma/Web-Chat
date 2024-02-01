@@ -2,7 +2,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { ResetPassInput } from '@/lib/types';
 import { Input, Button, Loader } from '@/components';
 import { resetPassword } from '@/app/actions/passwordActions';
-import { emailValidator, showToast } from '@/lib/utils';
+import { emailValidator, showToast } from '@/lib/validators';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 
 const ResetPassword: React.FC = () => {

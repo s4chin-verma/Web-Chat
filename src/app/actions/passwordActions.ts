@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ResetPasswordPayload, ChangePasswordPayload } from '@/app/types/payloadTypes';
-import { showToast } from '@/lib/utils';
+import { showToast } from '@/lib/validators';
 import { backendURL } from '../types';
 import axios from 'axios';
 

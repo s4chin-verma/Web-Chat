@@ -8,17 +8,17 @@ import { Message } from '@/lib/types/section';
 const ChatSection: React.FC = () => {
   const { isLoading } = useAppSelector(state => state.chat);
   const dispatch = useAppDispatch();
-  const { receiverId, senderId } = useAppSelector(state => state.chat);
+  const { sender, receiver } = useAppSelector(state => state.chat);
   const [getOrCreateConversation, { data }] = useGetOrCreateConversationMutation();
 
   useEffect(() => {
     const fetchMessage = async () => {
       try {
         dispatch(setLoading(true));
-        if (senderId && receiverId) {
+        if (sender?._id && receiver?._id) {
           const result = await getOrCreateConversation({
-            user1: senderId,
-            user2: receiverId,
+            user1: sender._id,
+            user2: receiver._id,
           }).unwrap();
           dispatch(setCurrentChatId(result._id));
         }
@@ -29,37 +29,32 @@ const ChatSection: React.FC = () => {
       }
     };
 
-    if (receiverId) fetchMessage();
-  }, [receiverId, senderId, getOrCreateConversation, dispatch]);
-  console.log('This is Data', data?.messages);
+    if (receiver?._id) fetchMessage();
+  }, [receiver?._id, sender?._id, getOrCreateConversation, dispatch]);
 
   return (
     <>
       {isLoading ? (
-        <div className="flex h-screen items-center justify-center w-full">
+        <div className="flex-1 items-center justify-center">
           <Loader classname="w-52 h-52" />
         </div>
       ) : (
         <div className="flex-1">
-          {/* <!-- Chat Header --> */}
           <header className="bg-white p-4 text-gray-700">
-            <h1 className="text-2xl font-semibold">Alice</h1>
+            <h1 className="text-2xl font-semibold">{receiver?.username}</h1>
           </header>
-
-          {/* <!-- Chat Messages --> */}
           <div className="h-screen overflow-y-auto p-4 pb-36">
             {data?.messages.map((message: Message) => {
               const { authorId, msg } = message;
-              if (authorId === senderId) {
+              if (authorId === sender?._id) {
                 return <LeftChatBubble key={message._id} message={msg} />;
-              } else if (authorId === receiverId) {
+              } else if (authorId === receiver?._id) {
                 return <RightChatBubble key={message._id} message={msg} />;
               }
               return null;
             })}
           </div>
 
-          {/* <!-- Chat Input --> */}
           <footer className="bg-white border-t border-gray-300 p-4 absolute bottom-0 w-3/4">
             <div className="flex items-center">
               <input

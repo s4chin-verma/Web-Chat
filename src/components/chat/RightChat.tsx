@@ -5,7 +5,7 @@ interface RightChatBubbleProps {
 }
 
 const RightChatBubble: React.FC<RightChatBubbleProps> = ({ message }) => {
-  const receiverPictureUrl = useAppSelector(state => state.chat.receiverPicture);
+  const receiverPictureUrl = useAppSelector(state => state.chat.receiver?.picture);
 
   return (
     <div className="flex justify-end mb-4 cursor-pointer">

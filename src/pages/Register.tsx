@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { Error, Input, FormLink, Button, Loader, FileInput, AnimatedImage } from '@/components';
-import { registerValidator, showToast } from '@/lib/utils';
+import { registerValidator, showToast } from '@/lib/validators';
 import { registerUser } from '@/app/actions/authActions';
 import { RegisterInput } from '@/lib/types';
 import { useState, useEffect } from 'react';

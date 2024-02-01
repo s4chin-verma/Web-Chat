@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { RegisterUserPayload, LoginUserPayload } from '@/app/types/payloadTypes';
-import { showToast } from '@/lib/utils';
+import { showToast } from '@/lib/validators';
 import { backendURL } from '../types';
 
 export const registerUser = createAsyncThunk(

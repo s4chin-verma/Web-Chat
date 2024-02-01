@@ -2,7 +2,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { ChangePassInput } from '@/lib/types';
 import { Input, Button, Loader } from '@/components';
 import { changePassword } from '@/app/actions/passwordActions';
-import { passwordValidator, showToast } from '@/lib/utils';
+import { passwordValidator, showToast } from '@/lib/validators';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { useParams } from 'react-router-dom';
 

@@ -5,7 +5,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { Button, Error, Loader, Input, FormLink, CheckBox, AnimatedImage } from '@/components';
 import { LoginInput } from '@/lib/types';
 import { userLogin } from '@/app/actions/authActions';
-import { LoginValidator, showToast } from '@/lib/utils';
+import { LoginValidator, showToast } from '@/lib/validators';
 import { RootState } from '@/app/store';
 import data from '@/assets/Login.json';
 
@@ -17,7 +17,7 @@ const LoginPage: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (success) navigate('/chat');
+    if (success === true) navigate('/chat');
   }, [navigate, success]);
 
   const onSubmit: SubmitHandler<LoginInput> = data => {
