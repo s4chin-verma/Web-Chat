@@ -6,7 +6,7 @@ import { AuthState } from '@/app/types';
 const initialState: AuthState = {
   loading: false,
   userInfo: {},
-  userToken: null,
+  userToken: localStorage.getItem('token') || null,
   error: null,
   success: false,
 };
@@ -14,17 +14,21 @@ const initialState: AuthState = {
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    setLoading: state => {
+      state.loading = true;
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(registerUser.pending, state => {
         state.loading = true;
       })
-      .addCase(registerUser.fulfilled, (state, { payload }) => {
+      .addCase(registerUser.fulfilled, (state, action) => {
         state.loading = false;
         state.success = true;
-        state.userInfo = payload.response;
-        state.userToken = payload.response.token;
+        state.userInfo = action.payload.response;
+        state.userToken = action.payload.token;
       })
       .addCase(registerUser.rejected, (state, { payload }) => {
         state.loading = false;
@@ -34,11 +38,11 @@ const authSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(userLogin.fulfilled, (state, { payload }) => {
+      .addCase(userLogin.fulfilled, (state, action) => {
         state.loading = false;
         state.success = true;
-        state.userInfo = payload.response;
-        state.userToken = payload.response.token;
+        state.userInfo = action.payload.response;
+        state.userToken = action.payload.token;
       })
       .addCase(userLogin.rejected, (state, { payload }) => {
         state.loading = false;
@@ -65,4 +69,5 @@ const authSlice = createSlice({
   },
 });
 
+export const { setLoading } = authSlice.actions;
 export default authSlice.reducer;

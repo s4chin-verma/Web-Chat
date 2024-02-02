@@ -9,6 +9,8 @@ import CheckBox from './form/CheckBox';
 import NavItem from './nav/NavLink';
 import NavButton from './nav/NavButton';
 import DarkModeBtn from './button/DarkModeBtn';
+import MemberLabel from './chat/MemberLabel';
+import FileInput from './form/FileInput';
 
 export {
   Error,
@@ -22,4 +24,6 @@ export {
   NavItem,
   NavButton,
   DarkModeBtn,
+  MemberLabel,
+  FileInput,
 };

@@ -16,17 +16,13 @@ const LoginPage: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // if (success) navigate('/chat');
+    if (success) navigate('/chat');
   }, [navigate, success]);
 
   const onSubmit: SubmitHandler<LoginInput> = data => {
     const { status, error } = LoginValidator(data);
-    console.log(data);
-    if (status === true) {
-      dispatch(userLogin(data));
-    } else {
-      showToast(error, 'warning');
-    }
+    if (status === true) dispatch(userLogin(data));
+    else showToast(error, 'warning');
   };
 
   return (
@@ -58,7 +54,7 @@ const LoginPage: React.FC = () => {
           <FormLink children="Forgot Password?" to="/reset-password" classname="mb-6" />
           <Button children="Login" type="submit" />
         </form>
-        <FormLink children="Sign up Here" to="/register" classname='text-center'/>
+        <FormLink children="Sign up Here" to="/register" classname="text-center" />
       </div>
     </section>
   );

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-export interface ButtonProps {
+interface ButtonProps {
   type: 'button' | 'submit' | 'reset';
   onClick?: () => void;
   to?: string;

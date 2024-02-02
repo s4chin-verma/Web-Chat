@@ -2,6 +2,7 @@ export interface RegisterUserPayload {
   username: string;
   email: string;
   password: string;
+  picture: string | null;
 }
 
 export interface LoginUserPayload {

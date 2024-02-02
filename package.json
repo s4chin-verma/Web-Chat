@@ -12,6 +12,9 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.1.0",
     "axios": "^1.6.7",
+    "compressorjs": "^1.2.1",
+    "firebase": "^10.8.0",
+    "image-compressor": "^2.0.3",
     "lottie-react": "^2.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -19,13 +22,15 @@
     "react-icons": "^5.0.1",
     "react-redux": "^9.1.0",
     "react-router-dom": "^6.21.3",
-    "react-toastify": "^10.0.4"
+    "react-toastify": "^10.0.4",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@iconify/react": "^4.1.1",
     "@types/node": "^20.11.10",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
+    "@types/uuid": "^9.0.8",
     "@typescript-eslint/eslint-plugin": "^6.14.0",
     "@typescript-eslint/parser": "^6.14.0",
     "@vitejs/plugin-react": "^4.2.1",

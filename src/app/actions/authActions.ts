@@ -6,7 +6,7 @@ import { backendURL } from '../types';
 
 export const registerUser = createAsyncThunk(
   'auth/register',
-  async ({ username, email, password }: RegisterUserPayload, { rejectWithValue }) => {
+  async ({ username, email, password, picture }: RegisterUserPayload, { rejectWithValue }) => {
     try {
       const config = {
         headers: {
@@ -16,10 +16,12 @@ export const registerUser = createAsyncThunk(
 
       const { data } = await axios.post(
         `${backendURL}/api/user/register`,
-        { username, email, password },
+        { username, email, password, picture },
         config
       );
 
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', data.response);
       return data;
     } catch (error: any) {
       showToast(error.response.data.msg, 'error');
@@ -48,6 +50,7 @@ export const userLogin = createAsyncThunk(
       );
 
       localStorage.setItem('token', data.token);
+      localStorage.setItem('user', data.response);
       return data;
     } catch (error: any) {
       showToast(error.response.data.msg, 'error');
