@@ -21,7 +21,7 @@ export const registerUser = createAsyncThunk(
       );
 
       localStorage.setItem('token', data.token);
-      localStorage.setItem('user', data.response);
+      localStorage.setItem('user', JSON.stringify(data.response));
       return data;
     } catch (error: any) {
       showToast(error.response.data.msg, 'error');
@@ -50,7 +50,7 @@ export const userLogin = createAsyncThunk(
       );
 
       localStorage.setItem('token', data.token);
-      localStorage.setItem('user', data.response);
+      localStorage.setItem('user', JSON.stringify(data.response));
       return data;
     } catch (error: any) {
       showToast(error.response.data.msg, 'error');

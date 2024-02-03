@@ -3,9 +3,11 @@ import { registerUser, userLogin } from '@/app/actions/authActions';
 import { resetPassword, changePassword } from '@/app/actions/passwordActions';
 import { AuthState } from '@/app/types';
 
+const storedUser = localStorage.getItem('user');
+
 const initialState: AuthState = {
   loading: false,
-  userInfo: {},
+  userInfo: storedUser !== null ? JSON.parse(storedUser) : {},
   userToken: localStorage.getItem('token') || null,
   error: null,
   success: false,

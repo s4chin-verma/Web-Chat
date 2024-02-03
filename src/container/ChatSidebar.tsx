@@ -1,4 +1,6 @@
+import { setReceiverId } from '@/app/slices/chatSlice';
 import { MemberLabel } from '@/components';
+import { useDispatch } from 'react-redux';
 
 type User = {
   _id: string;
@@ -11,6 +13,12 @@ type ChatSideBarProps = {
 };
 
 const ChatSideBar: React.FC<ChatSideBarProps> = ({ users }) => {
+  const dispatch = useDispatch();
+
+  const handleClick = (id: string) => {
+    dispatch(setReceiverId(id));
+  };
+
   return (
     <>
       <div className="w-1/4 bg-white border-r border-gray-300">
@@ -50,8 +58,15 @@ const ChatSideBar: React.FC<ChatSideBarProps> = ({ users }) => {
         </header>
 
         <div className="overflow-y-auto h-screen p-3 mb-9 pb-20">
-          {users.map((user, index) => (
-            <MemberLabel key={index} {...user} />
+          {users.map(user => (
+            <MemberLabel
+              key={user._id}
+              {...user}
+              onClick={event => {
+                event.preventDefault();
+                handleClick(user._id);
+              }}
+            />
           ))}
         </div>
       </div>

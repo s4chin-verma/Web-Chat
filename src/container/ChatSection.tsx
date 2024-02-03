@@ -1,4 +1,37 @@
+import { useEffect } from 'react';
+import { useGetOrCreateConversationMutation } from '@/app/api/conversationQuery';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentChatId } from '@/app/slices/chatSlice';
+import { RootState } from '@/app/store';
+
 const ChatSection: React.FC = () => {
+  const dispatch = useDispatch();
+  const { receiverId, senderId } = useSelector((state: RootState) => state.chat);
+
+  const [getOrCreateConversation, { data, isError }] = useGetOrCreateConversationMutation();
+
+  useEffect(() => {
+    const fetchConversation = async () => {
+      try {
+        if (senderId && receiverId) {
+          await getOrCreateConversation({
+            user1: senderId,
+            user2: receiverId,
+          });
+
+          if (data?.conversation && !isError) {
+            const currentChatId = data.conversation._id;
+            dispatch(setCurrentChatId(currentChatId));
+          }
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchConversation();
+  }, [receiverId, senderId, getOrCreateConversation, dispatch, isError]);
+
   return (
     <div className="flex-1">
       {/* <!-- Chat Header --> */}
