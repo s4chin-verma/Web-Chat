@@ -1,12 +1,7 @@
+import { backendURL } from '@/app/types';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type { RootState } from '../store';
-import { backendURL } from '../types';
-
-type Conversation = {
-  _id: string | null;
-  members: [];
-  messages: [];
-};
+import type { RootState } from '@/app/store';
+import type { Conversation } from '@/app/types/queryTypes';
 
 export const conversationsApi = createApi({
   reducerPath: 'conversationsApi',

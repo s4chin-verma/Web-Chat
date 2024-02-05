@@ -1,6 +1,8 @@
-import { setReceiverId } from '@/app/slices/chatSlice';
+import { setCurrentChatId, setReceiverId, setLoading } from '@/app/slices/chatSlice';
 import { MemberLabel } from '@/components';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { useGetOrCreateConversationMutation } from '@/app/api/conversationQuery';
+import { useEffect } from 'react';
 
 type User = {
   _id: string;
@@ -13,9 +15,35 @@ type ChatSideBarProps = {
 };
 
 const ChatSideBar: React.FC<ChatSideBarProps> = ({ users }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  const { receiverId, senderId } = useAppSelector(state => state.chat);
+  const [getOrCreateConversation] = useGetOrCreateConversationMutation({
+    fixedCacheKey: 'shared-update-post',
+  });
 
-  const handleClick = (id: string) => {
+  useEffect(() => {
+    const fetchMessage = async () => {
+      try {
+        dispatch(setLoading(true));
+        if (senderId && receiverId) {
+          const result = await getOrCreateConversation({
+            user1: senderId,
+            user2: receiverId,
+          }).unwrap();
+
+          dispatch(setCurrentChatId(result._id));
+        }
+      } catch (error) {
+        console.error(error);
+      } finally {
+        dispatch(setLoading(false));
+      }
+    };
+
+    if (receiverId) fetchMessage();
+  }, [receiverId, senderId, getOrCreateConversation, dispatch]);
+
+  const handleClick = async (id: string) => {
     dispatch(setReceiverId(id));
   };
 

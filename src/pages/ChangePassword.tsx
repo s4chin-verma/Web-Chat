@@ -3,14 +3,13 @@ import { ChangePassInput } from '@/lib/types';
 import { Input, Button, Loader } from '@/components';
 import { changePassword } from '@/app/actions/passwordActions';
 import { passwordValidator, showToast } from '@/lib/utils';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/app/store';
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { useParams } from 'react-router-dom';
 
 const ChangePassword: React.FC = () => {
   const { register, handleSubmit } = useForm<ChangePassInput>();
-  const { loading } = useSelector((state: RootState) => state.auth);
-  const dispatch = useDispatch<any>();
+  const { loading } = useAppSelector(state => state.auth);
+  const dispatch = useAppDispatch();
   const { token } = useParams();
 
   const onSubmit: SubmitHandler<ChangePassInput> = data => {
@@ -23,7 +22,7 @@ const ChangePassword: React.FC = () => {
     <section className="max-w-md mx-auto mt-24 bg-white p-8 rounded-md shadow-md">
       <div className="flex gap-4">
         <h2 className="text-2xl font-bold mb-4">Change Password!</h2>
-        {loading && <Loader />}
+        {loading && <Loader classname="h-8 w-8" />}
       </div>
       <p className="text-gray-600 mb-6">Please Enter Your New Password</p>
       <form onSubmit={handleSubmit(onSubmit)}>

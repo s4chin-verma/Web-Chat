@@ -1,14 +1,14 @@
 import { useEffect } from 'react';
-import { ChatSideBar, ChatSection } from '@/container';
+import { ChatSideBar, ChatSection, Welcome } from '@/container';
 import { useGetAllUsersQuery } from '@/app/api/allUserQuery';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/app/store';
+import { useAppSelector, useAppDispatch } from '@/app/hooks';
 import { setSenderId } from '@/app/slices/chatSlice';
+import { Loader } from '@/components';
 
 export default function Chat() {
-  const dispatch = useDispatch();
-  const { userInfo } = useSelector((state: RootState) => state.auth);
-  const { currentChatId } = useSelector((state: RootState) => state.chat);
+  const dispatch = useAppDispatch();
+  const { userInfo } = useAppSelector(state => state.auth);
+  const { currentChatId } = useAppSelector(state => state.chat);
 
   const { data, isLoading } = useGetAllUsersQuery();
 
@@ -20,10 +20,10 @@ export default function Chat() {
 
   return (
     <>
-      {isLoading && <span>Loading......</span>}
+      {isLoading && <Loader classname='h-52 w-52'/>}
       <main className="flex h-screen overflow-hidden">
         <ChatSideBar users={data || []} />
-        {currentChatId ? <p>Welcome to Chat Room</p> : <ChatSection />}
+        {currentChatId === null ? <Welcome /> : <ChatSection />}
       </main>
     </>
   );

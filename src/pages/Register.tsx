@@ -1,9 +1,8 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { Error, Input, FormLink, Button, Loader, FileInput } from '@/components';
 import { registerValidator, showToast } from '@/lib/utils';
 import { registerUser } from '@/app/actions/authActions';
-import { RootState } from '@/app/store';
 import { RegisterInput } from '@/lib/types';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -14,11 +13,11 @@ import { v4 } from 'uuid';
 import Compressor from 'compressorjs';
 
 const Register: React.FC = () => {
-  const dispatch = useDispatch<any>();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [imageUpload, setImageUpload] = useState<File | null>(null);
   const { register, handleSubmit } = useForm<RegisterInput>();
-  const { success, loading, error } = useSelector((state: RootState) => state.auth);
+  const { success, loading, error } = useAppSelector(state => state.auth);
 
   useEffect(() => {
     if (success) navigate('/chat');
@@ -65,7 +64,7 @@ const Register: React.FC = () => {
       <div className="lg:py-28 lg:px-36 md:p-52 sm:20 p-8 w-full lg:w-1/2">
         <div className="flex gap-4">
           <h1 className="text-2xl font-semibold mb-4">Register</h1>
-          {loading && <Loader />}
+          {loading && <Loader classname="h-8 w-8" />}
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           {error && <Error>{error}</Error>}

@@ -11,6 +11,8 @@ import NavButton from './nav/NavButton';
 import DarkModeBtn from './button/DarkModeBtn';
 import MemberLabel from './chat/MemberLabel';
 import FileInput from './form/FileInput';
+import RightChatBubble from './chat/RightChat';
+import LeftChatBubble from './chat/LeftChat';
 
 export {
   Error,
@@ -26,4 +28,6 @@ export {
   DarkModeBtn,
   MemberLabel,
   FileInput,
+  RightChatBubble,
+  LeftChatBubble,
 };

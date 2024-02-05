@@ -1,12 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { registerUser, userLogin } from '@/app/actions/authActions';
 import { resetPassword, changePassword } from '@/app/actions/passwordActions';
-import { AuthState } from '@/app/types';
-
-const storedUser = localStorage.getItem('user');
+import { AuthState, storedUser } from '@/app/types';
 
 const initialState: AuthState = {
-  loading: false,
+  loading: true,
   userInfo: storedUser !== null ? JSON.parse(storedUser) : {},
   userToken: localStorage.getItem('token') || null,
   error: null,

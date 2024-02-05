@@ -1,3 +1,4 @@
+export const DARK_MODE = 'DARK_MODE';
 export interface LoginInput {
   username: string;
   password: string;
@@ -17,4 +18,15 @@ export interface ResetPassInput {
 export interface ChangePassInput {
   password: string;
   confirmPassword: string;
+}
+
+
+type User = {
+  _id: string;
+  username: string;
+  picture: string;
+};
+
+export interface ChatSideBarProps {
+  users: User[];
 }

@@ -37,7 +37,7 @@ const LoginPage: React.FC = () => {
       <div className="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2">
         <div className="flex gap-6">
           <h1 className="text-2xl font-semibold mb-4">Login</h1>
-          {loading && <Loader />}
+          {loading && <Loader classname='h-8 w-8'/>}
           {error && <Error>{error}</Error>}
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
