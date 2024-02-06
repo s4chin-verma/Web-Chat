@@ -1,6 +1,6 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import { Error, Input, FormLink, Button, Loader, FileInput } from '@/components';
+import { Error, Input, FormLink, Button, Loader, FileInput, AnimatedImage } from '@/components';
 import { registerValidator, showToast } from '@/lib/utils';
 import { registerUser } from '@/app/actions/authActions';
 import { RegisterInput } from '@/lib/types';
@@ -11,6 +11,7 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { setLoading } from '@/app/slices/authSlice';
 import { v4 } from 'uuid';
 import Compressor from 'compressorjs';
+import data from '@/assets/Register.json';
 
 const Register: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -54,12 +55,8 @@ const Register: React.FC = () => {
 
   return (
     <div className="bg-gray-100 flex justify-center items-center h-screen">
-      <div className="w-1/2 h-screen hidden lg:block">
-        <img
-          src="https://placehold.co/800x/667fff/ffffff.png?text=Your+Image&font=Montserrat"
-          alt="Placeholder Image"
-          className="object-cover w-full h-full"
-        />
+      <div className="w-1/2 h-screen hidden lg:flex lg:items-center lg:justify-center">
+        <AnimatedImage data={data} classname="h-4/6 w-4/6" />
       </div>
       <div className="lg:py-28 lg:px-36 md:p-52 sm:20 p-8 w-full lg:w-1/2">
         <div className="flex gap-4">

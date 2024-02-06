@@ -1,7 +1,7 @@
 import { NavItem, NavButton, DarkModeBtn } from '@/components';
 import { useState } from 'react';
 import { navbarSection } from '@/lib/navbar';
-import { useWindowWidth } from '@/context/windowWidth';
+import { useWindowWidth } from '@/context/WindowWidth';
 import { Link } from 'react-router-dom';
 
 const Header: React.FC = () => {

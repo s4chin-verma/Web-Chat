@@ -4,7 +4,7 @@ import { resetPassword, changePassword } from '@/app/actions/passwordActions';
 import { AuthState, storedUser } from '@/app/types';
 
 const initialState: AuthState = {
-  loading: true,
+  loading: false,
   userInfo: storedUser !== null ? JSON.parse(storedUser) : {},
   userToken: localStorage.getItem('token') || null,
   error: null,
