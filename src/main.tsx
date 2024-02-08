@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom/client';
 import { router } from './App.tsx';
 import { RouterProvider } from 'react-router-dom';
 import { Provider as ReduxProvider } from 'react-redux';
-import { ThemeProvider } from './context/DarkModeProvider';
+import { ThemeProvider } from './lib/context/DarkModeProvider.tsx';
 import { store } from './app/store';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

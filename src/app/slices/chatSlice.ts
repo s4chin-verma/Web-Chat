@@ -3,6 +3,7 @@ import { ChatState, storedUser } from '../types';
 import { RootState } from '../store';
 
 const initialState: ChatState = {
+  chat: false,
   isLoading: false,
   currentChatId: null,
   senderId: null,
@@ -15,6 +16,9 @@ const chatSlice = createSlice({
   name: 'chat',
   initialState,
   reducers: {
+    setChat: (state, action: PayloadAction<boolean>) => {
+      state.chat = action.payload;
+    },
     setSenderId: (state, action: PayloadAction<string | null>) => {
       state.senderId = action.payload;
     },
@@ -42,6 +46,7 @@ const chatSlice = createSlice({
 });
 
 export const {
+  setChat,
   setSenderId,
   setReceiverId,
   setCurrentChatId,
@@ -57,5 +62,6 @@ export const senderPicture = (state: RootState) => state.chat.currentChatId;
 export const receiverId = (state: RootState) => state.chat.currentChatId;
 export const receiverPicture = (state: RootState) => state.chat.currentChatId;
 export const isLoading = (state: RootState) => state.chat.isLoading;
+export const chat = (state: RootState) => state.chat.chat;
 
 export default chatSlice.reducer;

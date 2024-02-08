@@ -1,4 +1,4 @@
-import { useDarkMode } from '@/context/DarkModeProvider';
+import { useDarkMode } from '@/lib/context/DarkModeProvider';
 import { Icon } from '@iconify/react';
 
 const DarkModeBtn: React.FC<{ onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void }> = ({

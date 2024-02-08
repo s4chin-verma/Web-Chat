@@ -1,7 +1,7 @@
-import { backendURL } from '@/app/types';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import type { RootState } from '@/app/store';
 import type { Conversation } from '@/app/types/queryTypes';
+import { backendURL } from '../types';
 
 export const conversationsApi = createApi({
   reducerPath: 'conversationsApi',
@@ -23,6 +23,9 @@ export const conversationsApi = createApi({
         method: 'POST',
         body,
       }),
+      transformResponse: (response: any) => {
+        return response.data;
+      },
     }),
   }),
 });

@@ -12,6 +12,7 @@ export interface ThemeState {
   isDarkMode: boolean;
 }
 export interface ChatState {
+  chat: boolean;
   isLoading: boolean;
   currentChatId: string | null;
   senderId: string | null;
@@ -19,4 +20,3 @@ export interface ChatState {
   receiverId: string | null;
   receiverPicture: string | null;
 }
-

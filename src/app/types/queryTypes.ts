@@ -5,7 +5,12 @@ export type User = {
 };
 
 export type Conversation = {
-  _id: string | null;
-  members: [];
-  msg: [];
+  _id: string;
+  members: string[];
+  messages: {
+    authorId: string;
+    msg: string;
+    createdAt: string;
+    _id: string;
+  }[];
 };

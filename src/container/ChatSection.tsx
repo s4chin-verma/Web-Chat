@@ -1,8 +1,37 @@
 import { LeftChatBubble, Loader, RightChatBubble } from '@/components';
-import { useAppSelector } from '@/app/hooks';
+import { useGetOrCreateConversationMutation } from '@/app/api/conversationQuery';
+import { useAppSelector, useAppDispatch } from '@/app/hooks';
+import { useEffect } from 'react';
+import { setCurrentChatId, setLoading } from '@/app/slices/chatSlice';
+import { Message } from '@/lib/types/section';
 
 const ChatSection: React.FC = () => {
   const { isLoading } = useAppSelector(state => state.chat);
+  const dispatch = useAppDispatch();
+  const { receiverId, senderId } = useAppSelector(state => state.chat);
+  const [getOrCreateConversation, { data }] = useGetOrCreateConversationMutation();
+
+  useEffect(() => {
+    const fetchMessage = async () => {
+      try {
+        dispatch(setLoading(true));
+        if (senderId && receiverId) {
+          const result = await getOrCreateConversation({
+            user1: senderId,
+            user2: receiverId,
+          }).unwrap();
+          dispatch(setCurrentChatId(result._id));
+        }
+      } catch (error) {
+        console.error(error);
+      } finally {
+        dispatch(setLoading(false));
+      }
+    };
+
+    if (receiverId) fetchMessage();
+  }, [receiverId, senderId, getOrCreateConversation, dispatch]);
+  console.log('This is Data', data?.messages);
 
   return (
     <>
@@ -19,8 +48,15 @@ const ChatSection: React.FC = () => {
 
           {/* <!-- Chat Messages --> */}
           <div className="h-screen overflow-y-auto p-4 pb-36">
-            <LeftChatBubble message="Hello MOther Fucker" />
-            <RightChatBubble message="Bol Bhosdivale" />
+            {data?.messages.map((message: Message) => {
+              const { authorId, msg } = message;
+              if (authorId === senderId) {
+                return <LeftChatBubble key={message._id} message={msg} />;
+              } else if (authorId === receiverId) {
+                return <RightChatBubble key={message._id} message={msg} />;
+              }
+              return null;
+            })}
           </div>
 
           {/* <!-- Chat Input --> */}

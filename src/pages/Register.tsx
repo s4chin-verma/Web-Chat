@@ -6,7 +6,7 @@ import { registerUser } from '@/app/actions/authActions';
 import { RegisterInput } from '@/lib/types';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { storage } from '@/config/firebase';
+import { storage } from '@/lib/config/firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { setLoading } from '@/app/slices/authSlice';
 import { v4 } from 'uuid';
