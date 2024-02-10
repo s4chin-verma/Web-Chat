@@ -13,7 +13,7 @@ const DarkModeBtn: React.FC<{ onClick?: (e: React.MouseEvent<HTMLButtonElement>)
 
   return (
     <button
-      className="ml-2 rounded-lg p-1 text-text hover:text-accent focus:outline-none cursor-pointer w-fit undefined duration-200"
+      className="ml-2 rounded-lg p-1 text-red-500 hover:text-red-900 focus:outline-none cursor-pointer w-fit undefined duration-200"
       onClick={clickHandler}>
       <Icon icon={isDarkMode ? 'ph:moon' : 'carbon-sun'} width="26" height="26" />
     </button>

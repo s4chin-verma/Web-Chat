@@ -1,4 +1,5 @@
-import { Icon } from '@iconify/react';
+import { Logout } from '@/container';
+import { DarkModeBtn } from '@/components';
 
 type DropdownProps = {
   dropDownOpen: boolean;
@@ -11,15 +12,15 @@ const Dropdown: React.FC<DropdownProps> = ({ dropDownOpen }) => {
         <div
           id="menuDropdown"
           className="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg">
-          <ul className="py-2 px-3">
+          <ul className="py-2 px-3 flex flex-col justify-start gap-4">
             <li>
-              <button className="px-4 py-2 text-gray-800 hover:text-gray-400 flex">
-                <Icon icon="solar:user-id-linear" className="h-8 w-8" />
-                Profile
-              </button>
+              <h6 className="text-black">Profile</h6>
             </li>
             <li>
-              <button className="block px-4 py-2 text-gray-800 hover:text-gray-400">Logout</button>
+              <Logout />
+            </li>
+            <li>
+              <DarkModeBtn />
             </li>
           </ul>
         </div>

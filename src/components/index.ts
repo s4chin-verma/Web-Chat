@@ -13,7 +13,6 @@ import MemberLabel from './chat/MemberLabel';
 import FileInput from './form/FileInput';
 import RightChatBubble from './chat/RightChat';
 import LeftChatBubble from './chat/LeftChat';
-import Modal from './ui/Modal';
 
 export {
   Error,
@@ -31,5 +30,4 @@ export {
   FileInput,
   RightChatBubble,
   LeftChatBubble,
-  Modal,
 };
