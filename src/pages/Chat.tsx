@@ -1,6 +1,6 @@
 import { ChatSideBar, ChatSection, Welcome } from '@/container';
 import { useAppSelector } from '@/app/hooks';
-import { useLayoutEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function Chat() {
@@ -9,6 +9,10 @@ export default function Chat() {
   const navigate = useNavigate();
 
   useLayoutEffect(() => {
+    if (success == false) navigate('/login');
+  }, [success, navigate]);
+
+  useEffect(() => {
     if (success === false) {
       navigate('/login');
     }

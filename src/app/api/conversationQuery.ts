@@ -2,6 +2,10 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import type { RootState } from '@/app/store';
 import type { Conversation } from '@/app/types/queryTypes';
 import { backendURL } from '../types';
+interface AddMessageRequest {
+  authorId: string;
+  msg: string;
+}
 
 export const conversationsApi = createApi({
   reducerPath: 'conversationsApi',
@@ -27,7 +31,14 @@ export const conversationsApi = createApi({
         return response.data;
       },
     }),
+    addMessage: builder.mutation<void, { conversationId: string; body: AddMessageRequest }>({
+      query: ({ conversationId, body }) => ({
+        url: `/api/chat/conversations/${conversationId}`,
+        method: 'PUT',
+        body,
+      }),
+    }),
   }),
 });
 
-export const { useGetOrCreateConversationMutation } = conversationsApi;
+export const { useGetOrCreateConversationMutation, useAddMessageMutation } = conversationsApi;

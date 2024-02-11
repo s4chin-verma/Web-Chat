@@ -5,14 +5,14 @@ interface LeftChatBubbleProps {
 }
 
 const LeftChatBubble: React.FC<LeftChatBubbleProps> = ({ message }) => {
-  const senderPictureUrl = useAppSelector(state => state.chat.sender?.picture);
+  const receiverPicture = useAppSelector(state => state.chat.receiver?.picture);
 
   return (
     <div className="flex mb-4 cursor-pointer">
       <div className="w-9 h-9 rounded-full flex items-center justify-center mr-2">
         <img
           src={
-            senderPictureUrl ??
+            receiverPicture ??
             'https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg'
           }
           alt="User Avatar"

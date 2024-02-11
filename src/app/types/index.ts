@@ -17,5 +17,4 @@ export interface ChatState {
   isLoading: boolean;
   currentChatId: string | null;
   receiver: User | null;
-  sender: User | null;
 }

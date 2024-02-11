@@ -5,7 +5,7 @@ interface RightChatBubbleProps {
 }
 
 const RightChatBubble: React.FC<RightChatBubbleProps> = ({ message }) => {
-  const receiverPictureUrl = useAppSelector(state => state.chat.receiver?.picture);
+  const senderPicture = useAppSelector(state => state.auth.userInfo?.picture);
 
   return (
     <div className="flex justify-end mb-4 cursor-pointer">
@@ -15,7 +15,7 @@ const RightChatBubble: React.FC<RightChatBubbleProps> = ({ message }) => {
       <div className="w-9 h-9 rounded-full flex items-center justify-center ml-2">
         <img
           src={
-            receiverPictureUrl ??
+            senderPicture ??
             'https://cdn.iconscout.com/icon/free/png-512/free-avatar-370-456322.png?f=webp&w=256'
           }
           alt="User Avatar"

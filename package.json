@@ -13,6 +13,7 @@
     "@reduxjs/toolkit": "^2.1.0",
     "axios": "^1.6.7",
     "compressorjs": "^1.2.1",
+    "emoji-picker-react": "^4.7.14",
     "firebase": "^10.8.0",
     "image-compressor": "^2.0.3",
     "lottie-react": "^2.4.0",

@@ -1,12 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ChatState, storedUser } from '../types';
+import { ChatState } from '../types';
 import { RootState } from '../store';
 
 const initialState: ChatState = {
   chat: false,
   isLoading: false,
   currentChatId: null,
-  sender: storedUser ? JSON.parse(storedUser) : null,
   receiver: null,
 };
 
@@ -23,6 +22,7 @@ const chatSlice = createSlice({
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;
     },
+
     setReceiver: (state, action: PayloadAction<ChatState['receiver']>) => {
       state.receiver = action.payload;
     },

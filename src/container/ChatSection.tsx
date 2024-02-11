@@ -1,23 +1,26 @@
 import { LeftChatBubble, Loader, RightChatBubble } from '@/components';
 import { useGetOrCreateConversationMutation } from '@/app/api/conversationQuery';
 import { useAppSelector, useAppDispatch } from '@/app/hooks';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { setCurrentChatId, setLoading } from '@/app/slices/chatSlice';
 import { Message } from '@/lib/types/section';
+import { ChatInput } from '@/container';
 
 const ChatSection: React.FC = () => {
   const { isLoading } = useAppSelector(state => state.chat);
   const dispatch = useAppDispatch();
-  const { sender, receiver } = useAppSelector(state => state.chat);
+  const { userInfo } = useAppSelector(state => state.auth);
+  const { receiver } = useAppSelector(state => state.chat);
   const [getOrCreateConversation, { data }] = useGetOrCreateConversationMutation();
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const fetchMessage = async () => {
       try {
         dispatch(setLoading(true));
-        if (sender?._id && receiver?._id) {
+        if (userInfo?._id && receiver?._id) {
           const result = await getOrCreateConversation({
-            user1: sender._id,
+            user1: userInfo._id,
             user2: receiver._id,
           }).unwrap();
           dispatch(setCurrentChatId(result._id));
@@ -30,7 +33,13 @@ const ChatSection: React.FC = () => {
     };
 
     if (receiver?._id) fetchMessage();
-  }, [receiver?._id, sender?._id, getOrCreateConversation, dispatch]);
+  }, [receiver?._id, userInfo?._id, getOrCreateConversation, dispatch]);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [data]);
 
   return (
     <>
@@ -46,25 +55,19 @@ const ChatSection: React.FC = () => {
           <div className="h-screen overflow-y-auto p-4 pb-36">
             {data?.messages.map((message: Message) => {
               const { authorId, msg } = message;
-              if (authorId === sender?._id) {
-                return <LeftChatBubble key={message._id} message={msg} />;
-              } else if (authorId === receiver?._id) {
-                return <RightChatBubble key={message._id} message={msg} />;
-              }
-              return null;
+              return (
+                <div key={message._id}>
+                  {authorId === receiver?._id ? (
+                    <LeftChatBubble message={msg} />
+                  ) : (
+                    <RightChatBubble message={msg} />
+                  )}
+                </div>
+              );
             })}
+            {/* <div ref={scrollRef}></div> */}
           </div>
-
-          <footer className="bg-white border-t border-gray-300 p-4 absolute bottom-0 w-3/4">
-            <div className="flex items-center">
-              <input
-                type="text"
-                placeholder="Type a message..."
-                className="w-full p-2 rounded-md border border-gray-400 focus:outline-none focus:border-blue-500"
-              />
-              <button className="bg-indigo-500 text-white px-4 py-2 rounded-md ml-2">Send</button>
-            </div>
-          </footer>
+          <ChatInput />
         </div>
       )}
     </>
