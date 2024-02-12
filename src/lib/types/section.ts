@@ -4,7 +4,6 @@ export type NavLinkType = {
 };
 
 export type Message = {
-  _id: string;
   authorId: string;
   msg: string;
 };

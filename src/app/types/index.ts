@@ -12,9 +12,16 @@ export interface AuthState {
 export interface ThemeState {
   isDarkMode: boolean;
 }
+
+export type Message = {
+  authorId: string;
+  msg: string;
+};
+
 export interface ChatState {
   chat: boolean;
   isLoading: boolean;
   currentChatId: string | null;
   receiver: User | null;
+  messages: Message[] | null;
 }

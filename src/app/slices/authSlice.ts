@@ -18,7 +18,11 @@ const authSlice = createSlice({
     setLoading: state => {
       state.loading = true;
     },
-    resetAuthState: () => initialState,
+    resetAuthState: state => {
+      state.success = false;
+      state.userInfo = null;
+      state.userToken = null;
+    },
   },
   extraReducers: builder => {
     builder

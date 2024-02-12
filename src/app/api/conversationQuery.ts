@@ -31,14 +31,17 @@ export const conversationsApi = createApi({
         return response.data;
       },
     }),
-    addMessage: builder.mutation<void, { conversationId: string; body: AddMessageRequest }>({
-      query: ({ conversationId, body }) => ({
-        url: `/api/chat/conversations/${conversationId}`,
-        method: 'PUT',
-        body,
-      }),
-    }),
+    addMessageToServer: builder.mutation<void, { conversationId: string; body: AddMessageRequest }>(
+      {
+        query: ({ conversationId, body }) => ({
+          url: `/api/chat/conversations/${conversationId}`,
+          method: 'PUT',
+          body,
+        }),
+      }
+    ),
   }),
 });
 
-export const { useGetOrCreateConversationMutation, useAddMessageMutation } = conversationsApi;
+export const { useGetOrCreateConversationMutation, useAddMessageToServerMutation } =
+  conversationsApi;

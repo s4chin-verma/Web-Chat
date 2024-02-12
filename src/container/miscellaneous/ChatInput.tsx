@@ -1,28 +1,39 @@
 import EmojiPicker from 'emoji-picker-react';
 import { Icon } from '@iconify/react';
 import { useState } from 'react';
-import { useAppSelector } from '@/app/hooks';
-import { useAddMessageMutation } from '@/app/api/conversationQuery';
+import { useAppSelector, useAppDispatch } from '@/app/hooks';
+import { useAddMessageToServerMutation } from '@/app/api/conversationQuery';
+import { Socket } from 'socket.io-client';
+import { addMessage } from '@/app/slices/chatSlice';
+interface ChatInputProps {
+  socket: Socket;
+}
 
-const ChatInput: React.FC = () => {
+const ChatInput: React.FC<ChatInputProps> = ({ socket }) => {
   const [msg, setMsg] = useState<string>('');
   const [picker, setPicker] = useState(false);
-  const [addMessage] = useAddMessageMutation();
+  const [addMessageToServer] = useAddMessageToServerMutation();
   const { userInfo } = useAppSelector(state => state.auth);
-  const { currentChatId } = useAppSelector(state => state.chat);
+  const dispatch = useAppDispatch();
+  const { currentChatId, receiver } = useAppSelector(state => state.chat);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
       if (msg.length === 0) return;
-      addMessage({
-        conversationId: currentChatId as string,
-        body: {
-          authorId: userInfo?._id as string,
-          msg: msg,
-        },
-      });
-      console.log(msg);
+      if (userInfo?._id && receiver?._id && currentChatId) {
+        socket.emit('send-msg', { to: receiver._id, from: userInfo._id, message: msg });
+
+        dispatch(addMessage({ authorId: userInfo._id, msg: msg }));
+
+        addMessageToServer({
+          conversationId: currentChatId,
+          body: {
+            authorId: userInfo._id,
+            msg: msg,
+          },
+        });
+      }
     } catch (error) {
       console.log(error);
     } finally {

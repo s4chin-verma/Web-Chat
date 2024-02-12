@@ -1,21 +1,27 @@
-import { LeftChatBubble, Loader, RightChatBubble } from '@/components';
+import { LeftChatBubble, RightChatBubble, Loader } from '@/components';
 import { useGetOrCreateConversationMutation } from '@/app/api/conversationQuery';
 import { useAppSelector, useAppDispatch } from '@/app/hooks';
 import { useEffect, useRef } from 'react';
-import { setCurrentChatId, setLoading } from '@/app/slices/chatSlice';
+import { addMessage, setCurrentChatId, setLoading, setMessages } from '@/app/slices/chatSlice';
 import { Message } from '@/lib/types/section';
 import { ChatInput } from '@/container';
+import { v4 as uuidv4 } from 'uuid';
+import { Socket } from 'socket.io-client';
 
-const ChatSection: React.FC = () => {
+interface ChatSectionProps {
+  socket: Socket;
+}
+
+const ChatSection: React.FC<ChatSectionProps> = ({ socket }) => {
   const { isLoading } = useAppSelector(state => state.chat);
   const dispatch = useAppDispatch();
   const { userInfo } = useAppSelector(state => state.auth);
-  const { receiver } = useAppSelector(state => state.chat);
-  const [getOrCreateConversation, { data }] = useGetOrCreateConversationMutation();
+  const { receiver, messages } = useAppSelector(state => state.chat);
+  const [getOrCreateConversation] = useGetOrCreateConversationMutation();
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const fetchMessage = async () => {
+    const fetchMessages = async () => {
       try {
         dispatch(setLoading(true));
         if (userInfo?._id && receiver?._id) {
@@ -24,6 +30,7 @@ const ChatSection: React.FC = () => {
             user2: receiver._id,
           }).unwrap();
           dispatch(setCurrentChatId(result._id));
+          dispatch(setMessages(result.messages));
         }
       } catch (error) {
         console.error(error);
@@ -32,14 +39,27 @@ const ChatSection: React.FC = () => {
       }
     };
 
-    if (receiver?._id) fetchMessage();
+    if (receiver?._id) fetchMessages();
   }, [receiver?._id, userInfo?._id, getOrCreateConversation, dispatch]);
 
   useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollIntoView({ behavior: 'smooth' });
+    if (socket) {
+      const handleMessageReceive = (data: Message) => {
+        console.log(data);
+        dispatch(addMessage(data));
+      };
+      socket.on('msg-receive', handleMessageReceive);
+      return () => {
+        socket.off('msg-receive', handleMessageReceive);
+      };
     }
-  }, [data]);
+  }, [socket, dispatch]);
+
+  // useEffect(() => {
+  //   if (scrollRef.current) {
+  //     scrollRef.current.scrollIntoView({ behavior: 'smooth' });
+  //   }
+  // }, [messages]);
 
   return (
     <>
@@ -53,10 +73,10 @@ const ChatSection: React.FC = () => {
             <h1 className="text-2xl font-semibold">{receiver?.username}</h1>
           </header>
           <div className="h-screen overflow-y-auto p-4 pb-36">
-            {data?.messages.map((message: Message) => {
+            {messages?.map((message: Message) => {
               const { authorId, msg } = message;
               return (
-                <div key={message._id}>
+                <div key={uuidv4()}>
                   {authorId === receiver?._id ? (
                     <LeftChatBubble message={msg} />
                   ) : (
@@ -65,9 +85,9 @@ const ChatSection: React.FC = () => {
                 </div>
               );
             })}
-            {/* <div ref={scrollRef}></div> */}
+            <div ref={scrollRef}></div>
           </div>
-          <ChatInput />
+          <ChatInput socket={socket} />
         </div>
       )}
     </>
