@@ -1,30 +1,18 @@
-import bcrypt from 'bcrypt';
+import { randomBytes, pbkdf2Sync, timingSafeEqual } from 'crypto';
 
+// Function to hash password
 export async function hashPassword(password: string): Promise<string> {
-  const saltRounds = 10;
-
-  return new Promise((resolve, reject) => {
-    bcrypt.hash(password, saltRounds, (err, hash) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(hash);
-      }
-    });
-  });
+  const salt = randomBytes(16).toString('hex'); // Generate a random salt
+  const hash = pbkdf2Sync(password, salt, 1000, 64, 'sha512').toString('hex'); // Hash the password
+  return `${salt}:${hash}`; // Combine salt and hash and return
 }
 
+// Function to validate password
 export async function validatePassword(
   enteredPassword: string,
   hashedPassword: string
 ): Promise<boolean> {
-  return new Promise((resolve, reject) => {
-    bcrypt.compare(enteredPassword, hashedPassword, (err, result) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(result);
-      }
-    });
-  });
+  const [salt, hash] = hashedPassword.split(':'); // Extract salt and hash from the stored hashed password
+  const newHash = pbkdf2Sync(enteredPassword, salt, 1000, 64, 'sha512').toString('hex'); // Hash the entered password with the same salt
+  return timingSafeEqual(Buffer.from(hash, 'hex'), Buffer.from(newHash, 'hex')); // Compare the hashes in constant time
 }

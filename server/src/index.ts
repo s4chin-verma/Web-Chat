@@ -5,7 +5,6 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import router from './router';
 import bodyParser from 'body-parser';
-import cookieParser from 'cookie-parser';
 import setupSocket from './config/socket';
 
 dotenv.config();
@@ -15,7 +14,6 @@ const port = process.env.PORT;
 const MONGO_URL = process.env.MONGO_URI as string;
 
 app.use(cors({ credentials: true }));
-app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(express.json());
 

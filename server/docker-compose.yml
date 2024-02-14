@@ -16,13 +16,8 @@ services:
       - 8080:8080
     volumes:
       - .:/usr/src/app
-    environment:
-      PORT: 8080
-      MONGO_URI: mongodb://mongo_db:27017
-      JWT_SECRET: ALLAH_HU_AKBAR
-      ADMIN_MAIL: sachin.dev.web@gmail.com
-      ADMIN_MAIL_PASS: quzt mikh ljoz kayx
-      BASE_URL: http://localhost:5173
+    env_file:
+      - .env
     depends_on:
       - mongo_db
 
