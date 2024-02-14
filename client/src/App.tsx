@@ -7,7 +7,7 @@ const App: React.FC = () => {
   return (
     <>
       <Header />
-      <main>
+      <main className='bg-bg'>
         <Outlet />
       </main>
       <Toast />

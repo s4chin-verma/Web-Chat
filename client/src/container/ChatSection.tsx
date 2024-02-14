@@ -68,8 +68,8 @@ const ChatSection: React.FC<ChatSectionProps> = ({ socket }) => {
         </div>
       ) : (
         <div className="flex-1">
-          <header className="bg-white p-4 text-gray-700">
-            <h1 className="text-2xl font-semibold">{receiver?.username}</h1>
+          <header className="bg-bg-secondary p-4 text-gray-700">
+            <h1 className="text-2xl font-semibold text-text-1 capitalize">{receiver?.username}</h1>
           </header>
           <div className="h-screen overflow-y-auto p-4 pb-36">
             {messages?.map((message: Message) => {

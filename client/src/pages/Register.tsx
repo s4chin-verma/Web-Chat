@@ -1,6 +1,6 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import { Error, Input, FormLink, Button, Loader, FileInput, AnimatedImage } from '@/components';
+import { Input, FormLink, Button, Loader, FileInput, AnimatedImage } from '@/components';
 import { registerValidator, showToast } from '@/lib/validators';
 import { registerUser } from '@/app/actions/authActions';
 import { RegisterInput } from '@/lib/types';
@@ -18,7 +18,7 @@ const Register: React.FC = () => {
   const navigate = useNavigate();
   const [imageUpload, setImageUpload] = useState<File | null>(null);
   const { register, handleSubmit } = useForm<RegisterInput>();
-  const { success, loading, error } = useAppSelector(state => state.auth);
+  const { success, loading } = useAppSelector(state => state.auth);
 
   useEffect(() => {
     if (success) navigate('/chat');
@@ -30,7 +30,7 @@ const Register: React.FC = () => {
 
   const onSubmit: SubmitHandler<RegisterInput> = async data => {
     const { status, error } = registerValidator(data);
-    if (status == true) {
+    if (status === true) {
       dispatch(setLoading());
       if (imageUpload) {
         const compressedResult = await new Promise<Blob>(resolve => {
@@ -54,17 +54,16 @@ const Register: React.FC = () => {
   };
 
   return (
-    <div className="bg-gray-100 flex justify-center items-center h-screen">
+    <div className="bg-bg flex justify-center items-center h-screen">
       <div className="w-1/2 h-screen hidden lg:flex lg:items-center lg:justify-center">
-        <AnimatedImage data={data} classname="h-4/6 w-4/6" />
+        <AnimatedImage data={data} classname="transform scale-150" />
       </div>
       <div className="lg:py-28 lg:px-36 md:p-52 sm:20 p-8 w-full lg:w-1/2">
         <div className="flex gap-4">
-          <h1 className="text-2xl font-semibold mb-4">Register</h1>
+          <h1 className="text-2xl text-text-1 font-semibold mb-4">Register</h1>
           {loading && <Loader classname="h-8 w-8" />}
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
-          {error && <Error>{error}</Error>}
           <Input register={register} type="text" name="username" label="username" />
           <Input register={register} type="emil" name="email" label="email" />
           <Input register={register} type="password" name="password" label="password" />

@@ -1,0 +1,15 @@
+.logoutModal {
+  background: var(--foreground);
+  max-width: 500px;
+  border-color: var(--border);
+  border-width: 2px;
+  border-radius: 20px;
+  width: 100%;
+}
+
+.profileModal {
+  background: var(--foreground);
+  border-radius: 20px;
+  border-width: 2px;
+  border-color: var(--border);
+}

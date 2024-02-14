@@ -38,7 +38,7 @@ export default function Chat() {
 
   return (
     <>
-      <main className="flex h-screen overflow-hidden">
+      <main className="flex h-screen overflow-hidden bg-bg">
         <ChatSideBar />
         {chat ? <ChatSection socket={socket.current} /> : <Welcome />}
         <Toast />

@@ -19,8 +19,8 @@ const ChatSideBar: React.FC = () => {
 
   return (
     <>
-      <div className="min-w-[25%] bg-white border-r border-gray-300">
-        <header className="p-4 border-b border-gray-300 flex justify-between items-center bg-indigo-600 text-white">
+      <div className="min-w-[25%] bg-bg border-r border-border">
+        <header className="p-4 border-b border-border flex justify-between items-center bg-card text-white">
           <h1 className="text-2xl font-semibold">Chat Room</h1>
           <div className="relative">
             <Icon

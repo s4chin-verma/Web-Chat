@@ -4,6 +4,7 @@ import Input from './form/Input';
 import AnimatedImage from './ui/AnimatedImage';
 import Loader from './ui/Loader';
 import Button from './form/Button';
+import CustomButton from './button/Button';
 import FormLink from './form/FormLink';
 import CheckBox from './form/CheckBox';
 import NavItem from './nav/NavLink';
@@ -30,4 +31,5 @@ export {
   FileInput,
   RightChatBubble,
   LeftChatBubble,
+  CustomButton,
 };

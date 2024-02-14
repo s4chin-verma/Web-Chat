@@ -21,7 +21,7 @@ const FileInput: React.FC<FileInputProps> = ({ onChange }) => {
       <input type="file" onChange={handleFileChange} className='invisible' accept="image/*" id="fileInput" />
       <label htmlFor="fileInput" className="cursor-pointer flex items-center gap-4">
         <Icon className="pointer w-8 h-8" icon={'flat-color-icons:add-image'} />
-        <p>{selectedFileName || 'Choose Profile Picture'}</p>
+        <p className='text-text-2'>{selectedFileName || 'Choose Profile Picture'}</p>
       </label>
     </>
   );

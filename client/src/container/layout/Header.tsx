@@ -11,13 +11,13 @@ const Header: React.FC = () => {
 
   return (
     <div className="fixed inset-x-0 top-0 right-0 z-50 ">
-      <div className="antialiased bg-gray-100 dark-mode:bg-gray-900">
-        <div className="w-full text-gray-700 bg-white dark-mode:text-gray-200 dark-mode:bg-gray-800">
+      <div className="antialiased bg-gray-100 dark:bg-gray-900">
+        <div className="w-full text-gray-700 bg-white dark:text-gray-200 dark:bg-gray-800">
           <div className="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
             <div className="flex flex-row items-center justify-between p-4">
               <Link
                 to="/"
-                className="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline"
+                className="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark:text-white focus:outline-none focus:shadow-outline"
               >
                 Chat Room
               </Link>

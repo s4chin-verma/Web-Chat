@@ -42,12 +42,12 @@ const ChatInput: React.FC<ChatInputProps> = ({ socket }) => {
   };
 
   return (
-    <div className="bg-white border-t border-gray-300 p-4 absolute bottom-0 w-3/4">
+    <div className="bg-bg-secondary border-t border-border p-4 absolute bottom-0 w-3/4">
       <form className="flex items-center" onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Type a message..."
-          className="w-full p-2 rounded-md border border-gray-400 focus:outline-none focus:border-blue-500"
+          className="w-full p-2 rounded-md border bg-input border-border text-text-1 focus:outline-none focus:border-blue-500"
           value={msg}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             setMsg(event.target.value);
@@ -55,7 +55,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ socket }) => {
         />
         <Icon
           icon={'fluent-mdl2:emoji-2'}
-          className="mx-4 w-8 h-8 cursor-pointer"
+          className="mx-4 w-8 h-8 cursor-pointer text-text-1"
           onClick={() => setPicker(!picker)}
         />
         <div className="fixed bottom-20 right-0" onMouseLeave={() => setPicker(false)}>

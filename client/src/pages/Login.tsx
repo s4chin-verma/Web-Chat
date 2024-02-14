@@ -27,13 +27,13 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <section className="bg-gray-100 flex justify-center items-center h-screen">
+    <section className="bg-bg flex justify-center items-center h-screen">
       <div className="w-1/2 h-screen hidden lg:flex lg:items-center lg:justify-center">
         <AnimatedImage data={data} classname="h-4/6 w-4/6" />
       </div>
       <div className="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2">
         <div className="flex gap-6">
-          <h1 className="text-2xl font-semibold mb-4">Login</h1>
+          <h1 className="text-2xl text-text-1 font-semibold mb-4">Login</h1>
           {loading && <Loader classname="h-8 w-8" />}
           {error && <Error>{error}</Error>}
         </div>

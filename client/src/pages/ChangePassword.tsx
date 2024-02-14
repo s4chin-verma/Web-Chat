@@ -19,12 +19,12 @@ const ChangePassword: React.FC = () => {
   };
 
   return (
-    <section className="max-w-md mx-auto mt-24 bg-white p-8 rounded-md shadow-md">
+    <section className="max-w-md mx-auto mt-24 bg-bg-secondary p-8 rounded-md shadow-md border border-border">
       <div className="flex gap-4">
-        <h2 className="text-2xl font-bold mb-4">Change Password!</h2>
+        <h2 className="text-2xl font-bold mb-4 text-text-1">Change Password!</h2>
         {loading && <Loader classname="h-8 w-8" />}
       </div>
-      <p className="text-gray-600 mb-6">Please Enter Your New Password</p>
+      <p className="mb-6 text-text-2">Please Enter Your New Password</p>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input label="Password" type="password" name="password" register={register} />
         <Input
@@ -33,7 +33,7 @@ const ChangePassword: React.FC = () => {
           name="confirmPassword"
           register={register}
         />
-        <Button children="Reset Password" type="submit" className="mb-6" />
+        <Button children="Reset Password" type="submit" className="mb-6 mt-4" />
       </form>
     </section>
   );
