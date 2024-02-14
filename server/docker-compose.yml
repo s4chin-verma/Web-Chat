@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+  mongo_db:
+    container_name: db_container
+    image: mongo:latest
+    restart: always
+    ports:
+      - 2717:27017
+    volumes:
+      - mongo_db:/data/db
+
+  api:
+    build: .
+    ports:
+      - 8080:8080
+    volumes:
+      - .:/usr/src/app
+    environment:
+      PORT: 8080
+      MONGO_URI: mongodb://mongo_db:27017
+      JWT_SECRET: ALLAH_HU_AKBAR
+      ADMIN_MAIL: sachin.dev.web@gmail.com
+      ADMIN_MAIL_PASS: quzt mikh ljoz kayx
+      BASE_URL: http://localhost:5173
+    depends_on:
+      - mongo_db
+
+volumes:
+  mongo_db: {}

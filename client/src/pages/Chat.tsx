@@ -1,7 +1,7 @@
 import { ChatSideBar, ChatSection, Welcome } from '@/container';
 import { useAppSelector } from '@/app/hooks';
 import { Toast } from '@/components';
-import { useEffect, useLayoutEffect, useRef } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { io } from 'socket.io-client';
 import { showToast } from '@/lib/validators';
@@ -14,13 +14,17 @@ export default function Chat() {
 
   socket.current.emit('add-user', userInfo?._id);
 
-  socket.current.on('user-online', data => {
-    showToast(`This user Online ${data.name}`, 'info');
-  });
+  useCallback(() => {
+    socket.current.on('user-online', data => {
+      showToast(`This user Online ${data.name}`, 'info');
+    });
+  }, [userInfo]);
 
-  socket.current.on('get-users', data => {
-    console.log(data);
-  });
+  useCallback(() => {
+    socket.current.on('get-users', data => {
+      console.log(data);
+    });
+  }, [userInfo]);
 
   useLayoutEffect(() => {
     if (success == false) navigate('/login');

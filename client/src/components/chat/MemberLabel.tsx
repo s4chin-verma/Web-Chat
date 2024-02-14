@@ -1,11 +1,10 @@
 interface MemberLabelProps {
   picture: string;
   username: string;
-  latestMsg?: string;
   onClick: React.MouseEventHandler<HTMLDivElement>;
 }
 
-const MemberLabel: React.FC<MemberLabelProps> = ({ picture, username, latestMsg, onClick }) => {
+const MemberLabel: React.FC<MemberLabelProps> = ({ picture, username, onClick }) => {
   return (
     <div
       className="flex items-center mb-4 cursor-pointer hover:bg-gray-100 p-2 rounded-md"
@@ -15,7 +14,7 @@ const MemberLabel: React.FC<MemberLabelProps> = ({ picture, username, latestMsg,
       </div>
       <div className="flex-1">
         <h2 className="text-lg font-semibold">{username}</h2>
-        <p className="text-gray-600">{latestMsg}</p>
+        <p className="text-gray-600">User</p>
       </div>
     </div>
   );

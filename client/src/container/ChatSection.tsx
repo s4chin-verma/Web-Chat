@@ -45,7 +45,6 @@ const ChatSection: React.FC<ChatSectionProps> = ({ socket }) => {
   useEffect(() => {
     if (socket) {
       const handleMessageReceive = (data: Message) => {
-        console.log(data);
         dispatch(addMessage(data));
       };
       socket.on('msg-receive', handleMessageReceive);

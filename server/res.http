@@ -1,0 +1,7 @@
+
+GET http://localhost:8080/
+
+POST http://localhost:8080/api/user/register
+
+POST http://localhost:8080/api/user/login
+
