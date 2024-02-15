@@ -10,7 +10,7 @@ services:
     volumes:
       - mongo_db:/data/db
 
-  api:
+  chat:
     build: .
     ports:
       - 8080:8080
