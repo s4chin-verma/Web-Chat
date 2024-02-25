@@ -14,7 +14,7 @@ import Compressor from 'compressorjs';
 import data from '@/assets/Register.json';
 
 const Register: React.FC = () => {
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch(); 
   const navigate = useNavigate();
   const [imageUpload, setImageUpload] = useState<File | null>(null);
   const { register, handleSubmit } = useForm<RegisterInput>();

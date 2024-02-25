@@ -1,8 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ResetPasswordPayload, ChangePasswordPayload } from '@/app/types/payloadTypes';
 import { showToast } from '@/lib/validators';
-import { backendURL } from '../types';
 import axios from 'axios';
+
+const backendURL = import.meta.env.VITE_SERVER_URL;
 
 export const resetPassword = createAsyncThunk(
   'auth/reset-password',

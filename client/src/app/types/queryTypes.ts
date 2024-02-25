@@ -15,3 +15,8 @@ export type Conversation = {
     _id: string;
   }[];
 };
+
+export interface AddMessageRequest {
+  authorId: string;
+  msg: string;
+}

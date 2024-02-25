@@ -1,16 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import type { RootState } from '@/app/store';
-import type { Conversation } from '@/app/types/queryTypes';
-import { backendURL } from '../types';
-interface AddMessageRequest {
-  authorId: string;
-  msg: string;
-}
+import type { Conversation,AddMessageRequest } from '@/app/types/queryTypes';
+
 
 export const conversationsApi = createApi({
   reducerPath: 'conversationsApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: backendURL,
+    baseUrl: import.meta.env.VITE_SERVER_URL,
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).auth.userToken;
       if (token) {
@@ -23,7 +19,7 @@ export const conversationsApi = createApi({
   endpoints: builder => ({
     getOrCreateConversation: builder.mutation<Conversation, { user1: string; user2: string }>({
       query: body => ({
-        url: 'api/chat/conversations',
+        url: '/api/chat/conversations',
         method: 'POST',
         body,
       }),

@@ -1,12 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import type { RootState } from '@/app/store';
-import { backendURL } from '@/app/types';
 import { User } from '@/app/types/queryTypes';
 
 export const usersApi = createApi({
   reducerPath: 'usersApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: backendURL,
+    baseUrl: import.meta.env.VITE_SERVER_URL,
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).auth.userToken;
       if (token) {
@@ -18,7 +17,7 @@ export const usersApi = createApi({
   tagTypes: ['User'],
   endpoints: builder => ({
     getAllUsers: builder.query<User[], void>({
-      query: () => `api/chat/users`,
+      query: () => `/api/chat/users`,
     }),
   }),
 });
