@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import type { RootState } from '@/app/store';
-import type { Conversation,AddMessageRequest } from '@/app/types/queryTypes';
-
+import type { Conversation, AddMessageRequest } from '@/lib/types/redux';
 
 export const conversationsApi = createApi({
   reducerPath: 'conversationsApi',

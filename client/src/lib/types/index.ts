@@ -29,3 +29,4 @@ export interface ChatSideBarProps {
 export interface NavbarSectionType {
   navLinks: NavLinkType[];
 }
+

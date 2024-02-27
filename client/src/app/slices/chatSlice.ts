@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ChatState, Message } from '../types'; // Assuming you have a Message type defined
+import { ChatState, Message } from '@/lib/types/redux';
 import { RootState } from '../store';
 
 const initialState: ChatState = {

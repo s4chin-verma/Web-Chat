@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { registerUser, userLogin } from '@/app/actions/authActions';
 import { resetPassword, changePassword } from '@/app/actions/passwordActions';
-import { AuthState, storedUser } from '@/app/types';
+import { AuthState, storedUser } from '@/lib/types/redux';
 
 const initialState: AuthState = {
   loading: false,

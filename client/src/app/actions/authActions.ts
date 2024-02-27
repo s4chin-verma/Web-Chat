@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { RegisterUserPayload, LoginUserPayload } from '@/app/types/payloadTypes';
+import { RegisterUserPayload, LoginUserPayload } from '@/lib/types/redux';
 import { showToast } from '@/lib/validators';
 
 const backendURL = import.meta.env.VITE_SERVER_URL;
